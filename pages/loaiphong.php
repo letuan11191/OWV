@@ -170,7 +170,7 @@ require_once('auth.php');
 
             <div class="col-lg-12">
 
-                <h1 class="page-header">Loại tài sản OWV</h1>
+                <h1 class="page-header">Danh Sách Loại Phòng</h1>
 
             </div>
 
@@ -178,9 +178,9 @@ require_once('auth.php');
 
 
 
-             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm loại tài sản</a>
+             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm loại phòng</a>
 
-                    <?php include 'ThemLoaiTaiSan.php'; ?>
+                    <?php include 'ThemLoaiPhong.php'; ?>
 
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 
@@ -191,9 +191,9 @@ require_once('auth.php');
                             <tr>
 
                                 <th> Mã </th>
-
-                                <th> Tên loại tài sản </th>
-                                <th></th>
+                                <th> Tên loại phòng </th>
+                                <th> Chi Tiết</th>
+                                <th> Action</th>
 
                                 <!-- <th> Số lượng </th>
 
@@ -250,12 +250,14 @@ require_once('auth.php');
                                     }
 
                                 }
+
                                 return $number;
+
                             }
 
                             include('connect.php');
 
-                            $result = $db->prepare("SELECT * FROM loaitaisan ORDER BY LoaiTaiSan_ID");
+                            $result = $db->prepare("SELECT * FROM loaiphong ORDER BY LoaiPhong_ID");
 
                             $result->execute();
 
@@ -265,18 +267,30 @@ require_once('auth.php');
 
                                 <tr class="record">
 
-                                    <td><?php echo $row['LoaiTaiSan_ID']; ?></td>
+                                    <td><?php echo $row['LoaiPhong_ID']; ?></td>
 
-                                    <td><?php echo $row['LoaiTaiSan_Ten']; ?></td>
+                                    <td><?php echo $row['LoaiPhong_Ten']; ?></td>
                                     <td></td>
+                                    <td></td>
+
                                         <?php
+
                                             }
+
                                         ?>
+
                                     </tr>
+
                                     <?php
+
                                 
+
                                 ?>
+
+
+
                             </tbody>
+
                         </table>
 
 
@@ -418,24 +432,11 @@ return false;
         <script>
 
             $(document).ready(function() {
-
                 $('#dataTables-example').DataTable({
-
                     responsive: true
-
                 });
-
             });
-
         </script>
-
-
-
-      
-
    </body>
-
-
-
    </html>
 

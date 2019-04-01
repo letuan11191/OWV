@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2019 at 06:16 PM
+-- Generation Time: Apr 01, 2019 at 08:11 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -194,6 +194,35 @@ CREATE TABLE `dichuyentaisan` (
   `NCC` varchar(100) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dichuyentaisan`
+--
+
+INSERT INTO `dichuyentaisan` (`DiChuyeTaiSan_ID`, `Ngay`, `TaiSan_ID`, `SoLuong`, `LyDoDiChuyen`, `GhiChu`, `NCC`) VALUES
+(1, '0000-00-00', '1', 1, 'Nháº­p má»›i', '', ''),
+(13, '0000-00-00', '1', 1, 'Nháº­p má»›i', '', ''),
+(14, '0000-00-00', '14', 1, 'Nháº­p má»›i', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loaiphong`
+--
+
+CREATE TABLE `loaiphong` (
+  `LoaiPhong_ID` int(11) NOT NULL,
+  `LoaiPhong_Ten` varchar(50) CHARACTER SET utf16 COLLATE utf16_vietnamese_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `loaiphong`
+--
+
+INSERT INTO `loaiphong` (`LoaiPhong_ID`, `LoaiPhong_Ten`) VALUES
+(1, 'PhÃ²ng há»p'),
+(2, 'PhÃ²ng LÃ m Viá»‡c'),
+(3, 'KhÃ¡c');
+
 -- --------------------------------------------------------
 
 --
@@ -202,9 +231,17 @@ CREATE TABLE `dichuyentaisan` (
 
 CREATE TABLE `loaitaisan` (
   `LoaiTaiSan_ID` int(11) NOT NULL,
-  `LoaiTaiSan_Ma` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
   `LoaiTaiSan_Ten` varchar(100) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `loaitaisan`
+--
+
+INSERT INTO `loaitaisan` (`LoaiTaiSan_ID`, `LoaiTaiSan_Ten`) VALUES
+(2, 'Tá»§'),
+(3, 'BÃ n'),
+(4, 'Gháº¿');
 
 -- --------------------------------------------------------
 
@@ -260,8 +297,20 @@ INSERT INTO `ngayle` (`id`, `tenngayle`, `template`) VALUES
 
 CREATE TABLE `phongowv` (
   `Phong_ID` int(11) NOT NULL,
-  `Phong_Ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL
+  `Phong_Ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `LoaiPhong_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `phongowv`
+--
+
+INSERT INTO `phongowv` (`Phong_ID`, `Phong_Ten`, `LoaiPhong_ID`) VALUES
+(1, '2101', 1),
+(2, '2102', 3),
+(3, '2103', 2),
+(4, '2104', 2),
+(5, '2105', 2);
 
 -- --------------------------------------------------------
 
@@ -4227,10 +4276,17 @@ INSERT INTO `supliers_old` (`suplier_id`, `suplier_name`, `suplier_address`, `su
 
 CREATE TABLE `taisan` (
   `TaiSan_ID` int(11) NOT NULL,
-  `TaiSan_Ma` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
   `TaiSan_Ten` varchar(100) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
   `LoaiTaiSan_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `taisan`
+--
+
+INSERT INTO `taisan` (`TaiSan_ID`, `TaiSan_Ten`, `LoaiTaiSan_ID`) VALUES
+(1, 'Test1', 2),
+(14, 'q', 2);
 
 -- --------------------------------------------------------
 
@@ -4307,6 +4363,12 @@ ALTER TABLE `dichuyentaisan`
   ADD PRIMARY KEY (`DiChuyeTaiSan_ID`);
 
 --
+-- Indexes for table `loaiphong`
+--
+ALTER TABLE `loaiphong`
+  ADD PRIMARY KEY (`LoaiPhong_ID`);
+
+--
 -- Indexes for table `loaitaisan`
 --
 ALTER TABLE `loaitaisan`
@@ -4365,7 +4427,8 @@ ALTER TABLE `supliers`
 -- Indexes for table `taisan`
 --
 ALTER TABLE `taisan`
-  ADD PRIMARY KEY (`TaiSan_ID`);
+  ADD PRIMARY KEY (`TaiSan_ID`),
+  ADD UNIQUE KEY `TaiSan_Ten` (`TaiSan_Ten`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -4381,7 +4444,19 @@ ALTER TABLE `datphong`
 -- AUTO_INCREMENT for table `dichuyentaisan`
 --
 ALTER TABLE `dichuyentaisan`
-  MODIFY `DiChuyeTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DiChuyeTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `loaiphong`
+--
+ALTER TABLE `loaiphong`
+  MODIFY `LoaiPhong_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `loaitaisan`
+--
+ALTER TABLE `loaitaisan`
+  MODIFY `LoaiTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ngayle`
@@ -4393,7 +4468,7 @@ ALTER TABLE `ngayle`
 -- AUTO_INCREMENT for table `phongowv`
 --
 ALTER TABLE `phongowv`
-  MODIFY `Phong_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Phong_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -4418,6 +4493,12 @@ ALTER TABLE `purchases_item`
 --
 ALTER TABLE `supliers`
   MODIFY `suplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `taisan`
+--
+ALTER TABLE `taisan`
+  MODIFY `TaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -180,7 +180,7 @@ require_once('auth.php');
 
              <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm tài sản</a>
 
-                    <?php include 'addproduct.php'; ?>
+                    <?php include 'ThemTaiSan.php'; ?>
 
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 
@@ -197,25 +197,7 @@ require_once('auth.php');
                                 <th> Số lượng </th>
 
                                 <th> Chi tiết</th>
-
-                                <!-- <th> Description </th> -->
-
-                                <!-- <th> Category </th> -->
-
-                                <!-- <th> Cost </th> -->
-
-                                <!-- <th> SRP </th> -->
-
-                                <!-- <th> Supplier </th> -->
-
-                                <!-- <th witdh = "10%"> Thư tồn </th> -->
-
-                                <!-- <th>Số mail thông báo đã gửi trong tháng</th> -->
-
-                                <!-- <th witdh = "10%"> Product Unit </th> -->
-
-                                <!-- <th width="10%"> Action </th> -->
-
+                                <th>Action</th>
                             </tr>
 
                         </thead>
@@ -269,99 +251,24 @@ require_once('auth.php');
                                     <td><?php echo $row['TaiSan_ID']; ?></td>
 
                                     <td><?php echo $row['TaiSan_Ten']; ?></td>
+                                    <?php
+                                    
+                                    $result2 = $db->prepare("SELECT SUM(soluong) AS a FROM dichuyentaisan WHERE TaiSan_ID = ".$row['TaiSan_ID']);
+                                    $result2->execute();
+                                    for($j = 0; $row1 = $result2->fetch(); $j++)
+                                    {
+                                    ?>
+                                    <td> <?php echo $row1['a']; ?> </td>                                    
+                                    <?php } ?>
                                     <td></td>
-                                    <td></td>
 
-                                    <!-- <td><?php echo $row['Email']; ?></td> -->
-
-                                    <!-- <td><?php echo $row['note']; ?></td> -->
-
-                                    <!-- <td><?php echo $row['description_name']; ?></td> -->
-
-                                    <!-- <td><?php echo $row['category']; ?></td> -->
-
-                                    <!-- <td align="right"><?php
-
-                                        $pcost=$row['cost'];
-
-                                        echo formatMoney($pcost, true);
-
-                                        ?></td> -->
-
-                                        <!-- <td align="right"><?php
-
-                                            $pprice=$row['price'];
-
-                                            echo formatMoney($pprice, true);
-
-                                            ?></td> -->
-
-                                            <!-- <td><?php echo $row['supplier']; ?></td> -->
-
-                                            <!-- <td align="right"><?php echo $row['qty_left']; ?></td> -->
-
-                                            <!-- <td ><?php echo $row['unit']; ?></td> -->
-
-                                            <!-- <td><a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
-
-                                                <i class="fa fa-pencil"></i>  
-
-                                            </a>  
-
-                                            <a href="#" id="<?php echo $row['product_id']; ?>" class="btn btn-danger delbutton" title="Click To Delete">
-
-                                                <i class="fa fa-trash"></i>
-
-                                            </a>
-
-                                            <?php
-
-                                            if ($row['qty_left']<=0) {
-
-                                                echo '';
-
-                                            }
-
-                                            else{
-
-                                        ?>
-
-                                                <a href="incoming2.php?name=<?php echo  $row['product_code']; ?>&qty=<?php echo $row['qty_left']; ?>&id=<?php
-
-                                                $abc=$row['product_code'];
-
-                                                $results= $db->prepare('SELECT * FROM purchases WHERE p_name = :sasa');
-
-                                                $results->bindParam(':sasa',$abc);
-
-                                                $results->execute();
-
-                                                for($j=0; $rows = $results->fetch(); $j++)
-
-                                                {   echo $rows['transaction_id'];?>, <?php }
-
-                                              ?>" 
-
-                                             class ="btn btn-warning" title="Trả Thư"><span><i class="fa fa-mail-forward"></i></span></a>
-
-                                        </td> -->
-
-                                        
-
-                                        
+                                   
 
                                         <?php
-
                                             }
-
                                         ?>
-
                                     </tr>
-
                                     <?php
-
-                                }
-
                                 ?>
 
 

@@ -163,6 +163,12 @@ $finalcode='RS-'.createRandomPassword();
 
 					<li>
 
+						<a href="loaiphong.php"><i class="fa fa-list-alt fa-fw"></i> Danh sách loại phòng</a>
+
+					</li>
+
+					<li>
+
 						<a href="purchaseslist.php"><i class="fa fa-list-alt fa-fw"></i> Lịch sử di chuyển tài sản</a>
 
 					</li>
