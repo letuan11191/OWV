@@ -169,18 +169,27 @@ require_once('auth.php');
         <div class="row">
 
             <div class="col-lg-12">
+                <?php
+                        include('connect.php'); 
+                        $name = $_GET['id'];
+                        echo $name;
+                        $result = $db->prepare("SELECT * FROM phongOWV WHERE Phong_ID =$name");
+                        $result->execute();
+                        for($i=0; $row = $result->fetch(); $i++){
+                ?>
 
-                <h1 class="page-header">Danh Sách Loại Phòng</h1>
+                <h1 class="page-header">Danh Sách Tài Sản Phòng <?php echo $row['Phong_Ten'] ?></h1>
 
             </div>
 
             <div id="maintable"><div style="margin-top: -19px; margin-bottom: 21px;">
 
+                
+                    
+                
 
-
-             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm loại phòng</a>
-
-                    <?php include 'ThemLoaiPhong.php'; ?>
+             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm tài sản</a>             
+                    <?php include 'ThemPhong.php'; ?>
 
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 
@@ -188,45 +197,25 @@ require_once('auth.php');
 
                         <thead>
 
-                            <tr>
-
-                                <th> Mã </th>
-                                <th> Tên phòng </th>
-                                <th> Chi Tiết</th>
+                            <tr>                                
+                                <th> Loại Tài Sản</th>
+                                <th> Tên Tài Sản </th>
+                                <th> Số Lượng</th>
                                 <th> Action</th>
-
-                                <!-- <th> Số lượng </th>
-
-                                <th> Chi tiết</th> -->
-
-                                <!-- <th> Description </th> -->
-
-                                <!-- <th> Category </th> -->
-
-                                <!-- <th> Cost </th> -->
-
-                                <!-- <th> SRP </th> -->
-
-                                <!-- <th> Supplier </th> -->
-
-                                <!-- <th witdh = "10%"> Thư tồn </th> -->
-
-                                <!-- <th>Số mail thông báo đã gửi trong tháng</th> -->
-
-                                <!-- <th witdh = "10%"> Product Unit </th> -->
-
-                                <!-- <th width="10%"> Action </th> -->
-
                             </tr>
 
                         </thead>
-
                         <tbody>
                             <?php
+
                             function formatMoney($number, $fractional=false) {
+
                                 if ($fractional) {
+
                                     $number = sprintf('%.2f', $number);
+
                                 }
+
                                 while (true) {
 
                                     $replaced = preg_replace('/(-?\d+)(\d\d\d)/', '$1,$2', $number);
@@ -247,26 +236,18 @@ require_once('auth.php');
 
                             }
 
-                            include('connect.php');
-
-                            $result = $db->prepare("SELECT * FROM loaiphong ORDER BY LoaiPhong_ID");
-
-                            $result->execute();
-
-                            for($i=0; $row = $result->fetch(); $i++){
+                                                      
 
                                 ?>
 
                                 <tr class="record">
-
-                                    <td><?php echo $row['LoaiPhong_ID']; ?></td>
-
-                                    <td><?php echo $row['LoaiPhong_Ten']; ?></td>
+                                	<td>
+                                		<?php echo $row['LoaiPhong_Ten']; ?>
+                                	</td>                                    
+                                    <td><?php echo $row['Phong_Ten']; ?></td>
+                                    <td> <a href="#">Xem chi tiết tài sản trong phòng</a></td>
                                     <td>
-                                        <a href="#"> Xem chi tiết</a>
-                                    </td>
-                                    <td>
-                                        <a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
+                                    	<a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
 
                                                 <i class="fa fa-pencil"></i>  
 

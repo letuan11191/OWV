@@ -190,9 +190,8 @@ require_once('auth.php');
 
                         <thead>
 
-                            <tr>
-
-                                <th> Mã </th>
+                            <tr>                                
+                                <th> Loại phòng</th>
                                 <th> Tên phòng </th>
                                 <th> Chi tiết</th>
                                 <th> Action</th>
@@ -232,7 +231,7 @@ require_once('auth.php');
 
                             include('connect.php');
 
-                            $result = $db->prepare("SELECT * FROM phongOWV ORDER BY Phong_ID");
+                            $result = $db->prepare("SELECT * FROM phongOWV Inner Join loaiphong on phongowv.LoaiPhong_ID = loaiphong.LoaiPhong_ID ORDER BY Phong_ID");
 
                             $result->execute();
 
@@ -241,12 +240,24 @@ require_once('auth.php');
                                 ?>
 
                                 <tr class="record">
-
-                                    <td><?php echo $row['Phong_ID']; ?></td>
-
+                                	<td>
+                                		<?php echo $row['LoaiPhong_Ten']; ?>
+                                	</td>                                    
                                     <td><?php echo $row['Phong_Ten']; ?></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td> <a href="chitiettaisantheophong.php?id=<?php echo $row['Phong_ID'] ?>">Xem chi tiết tài sản trong phòng</a></td>
+                                    <td>
+                                    	<a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
+
+                                                <i class="fa fa-pencil"></i>  
+
+                                            </a>  
+
+                                            <a href="#" id="<?php echo $row['product_id']; ?>" class="btn btn-danger delbutton" title="Click To Delete">
+
+                                                <i class="fa fa-trash"></i>
+
+                                            </a>
+                                    </td>
 
                                         <?php
 

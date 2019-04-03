@@ -74,7 +74,36 @@
 
                               </select><br />
 
-                            
+                            <span>Thêm vào phòng: </span>
+                            <select name="phong" style="width: 550px;" class="chzn-select">
+
+                                 <?php
+
+                                 include('connect.php');
+
+                                 //$id =$_GET['name'];
+
+                                 $result = $db->prepare("SELECT * FROM phongowv ");
+
+                                 //$result->bindParam(':supp', $id);
+
+                                 $result->execute();
+
+                                 for($i=0; $row = $result->fetch(); $i++){
+
+                                  ?>
+
+                                  <option value="<?php echo $row['Phong_ID']; ?>"><?php echo $row['Phong_Ten']; ?></option>
+
+                                  <?php
+
+                                }
+
+                                
+
+                                ?>
+
+                              </select><br />
 
                             <span>Số lượng : </span><input type="text" name="soluong" class = "form-control" />
 
