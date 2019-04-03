@@ -1,6 +1,6 @@
  <div class="panel-body">
 
-    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="bosung" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 
         <div class="modal-dialog">
 
@@ -8,56 +8,35 @@
 
                 <div class="modal-header">
 
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal1" aria-hidden="true">&times;</button>
 
-                    <h4 class="modal-title" id="myModalLabel">Thêm tài sản</h4>
+                    <h4 class="modal-title" id="myModalLabel1">Bổ sung tài sản </h4>
 
                 </div>
 
                 <div class="modal-body">
 
-                    <form action="SaveAddTaiSan.php" method="post" class = "form-group" >
+                    <form action="SaveAddBoSungTaiSan.php" method="post" class = "form-group" >
 
-                        <div id="ac">
-
-
-                            <span>Loại tài sản:</span>
-
-                            <select name="loaitaisan" style="width: 550px;" class="chzn-select">
-
-                                 <?php
-
+                        <div id="ac1">
+                            <span>Tên Tài Sản : </span>
+                             <select name="taisanid" style="width: 550px;" class="chzn-select">
+                             <?php
                                  include('connect.php');
-
-                                 //$id =$_GET['name'];
-
-                                 $result = $db->prepare("SELECT * FROM loaitaisan ");
-
-                                 //$result->bindParam(':supp', $id);
-
+                                 $result = $db->prepare("SELECT * FROM taisan ");
                                  $result->execute();
 
                                  for($i=0; $row = $result->fetch(); $i++){
 
                                   ?>
 
-                                  <option value="<?php echo $row['LoaiTaiSan_ID']; ?>"><?php echo $row['LoaiTaiSan_Ten']; ?></option>
+                                  <option value="<?php echo $row['TaiSan_ID']; ?>"><?php echo $row['TaiSan_Ten']; ?></option>
 
                                   <?php
 
                                 }
-
-                                
-
                                 ?>
-
-                              </select><br />
-                            
-
-                            <span>Tên tài sản : </span><input type="text" name="tents" class = "form-control" />
-
-                            
-
+                                  </select><br />
                             <span>Thêm vào phòng: </span>
                             <select name="phong" style="width: 550px;" class="chzn-select">
 
@@ -89,7 +68,7 @@
 
                               </select><br />
 
-                            <span>Số lượng : </span><input type="text" name="sl" class = "form-control" />
+                            <span>Số lượng : </span><input type="text" name="soluong" class = "form-control" />
 
                             <span>Ghi Chú : </span><input type="text" name="ghichu" class = "form-control" value="Mua Mới" />
                             <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Save" />

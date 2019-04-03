@@ -159,6 +159,8 @@ require_once('auth.php');
 <body>
 
     <?php include('navfixed.php');?>
+    <?php include 'BoSungTaiSan.php'; ?>
+    <?php include 'ThemTaiSan.php'; ?> 
 
 
 
@@ -175,21 +177,15 @@ require_once('auth.php');
             </div>
 
             <div id="maintable"><div style="margin-top: -19px; margin-bottom: 21px;">
-
-
-
              <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm tài sản</a>
-
-                    <?php include 'ThemTaiSan.php'; ?>
-
+             <a  href = "#bosung" data-toggle = "modal" class="btn btn-primary">Bổ sung tài sản</a>
+                       
+            
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-
-
-
-                        <thead>
+                          <thead>
 
                             <tr>
-
+                                <th> Loại tài sản </th>
                                 <th> Mã </th>
 
                                 <th> Tên tài sản </th>
@@ -247,7 +243,17 @@ require_once('auth.php');
                                 ?>
 
                                 <tr class="record">
+                                    <td>
+                                        <?php
 
+                                        $result1 = $db->prepare("SELECT * FROM loaitaisan WHERE LoaiTaiSan_ID =".$row['LoaiTaiSan_ID']);
+
+                                        $result1->execute();
+                                        for ($i=0; $row1 = $result1 ->fetch() ; $i++) { 
+                                            echo $row1['LoaiTaiSan_Ten'];
+                                        }
+                                        ?>
+                                    </td>
                                     <td><?php echo $row['TaiSan_ID']; ?></td>
 
                                     <td><?php echo $row['TaiSan_Ten']; ?></td>
@@ -260,7 +266,20 @@ require_once('auth.php');
                                     ?>
                                     <td> <?php echo $row1['a']; ?> </td>                                    
                                     <?php } ?>
-                                    <td></td>
+                                    <td><a href="#">Xem chi tiết</a></td>
+                                     <td>
+                                        <a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
+
+                                                <i class="fa fa-pencil"></i>  
+
+                                            </a>  
+
+                                            <a href="#" id="<?php echo $row['product_id']; ?>" class="btn btn-danger delbutton" title="Click To Delete">
+
+                                                <i class="fa fa-trash"></i>
+
+                                            </a>
+                                    </td>
 
                                    
 
