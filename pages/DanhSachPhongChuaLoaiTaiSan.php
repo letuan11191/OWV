@@ -1,7 +1,7 @@
 <?php
 
 require_once('auth.php');
-
+ include('connect.php');
 ?>
 
 <!DOCTYPE html>
@@ -158,7 +158,11 @@ require_once('auth.php');
 
 <body>
 
-    <?php include('navfixed.php');?>
+    <?php include('navfixed.php');
+        $id = $_GET['id'];
+
+    ?>
+
 
 
 
@@ -170,54 +174,32 @@ require_once('auth.php');
 
             <div class="col-lg-12">
 
-                <h1 class="page-header">Loại tài sản OWV</h1>
+                <h1 class="page-header">Chi tiết phòng chứa loại tài sản: <?php 
+                $result = $db->prepare("SELECT * FROM loaitaisan WHERE LoaiTaiSan_ID =".$id);
+
+                            $result->execute();
+
+                            for($i1=0; $rowi1 = $result->fetch(); $i1++){
+                                    echo $rowi1['LoaiTaiSan_Ten'];
+                            }
+                            $result0 = $db->prepare("SELECT Distinct TaiSan_ID FROM taisan WHERE LoaiTaiSan_ID =".$id);
+
+                            $result0->execute();
+
+                            for($l=0; $row0 = $result0->fetch(); $l++){
+                                ?>
+
 
             </div>
 
-            <div id="maintable"><div style="margin-top: -19px; margin-bottom: 21px;">
-
-
-
-             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm loại tài sản</a>
-
-                    <?php include 'ThemLoaiTaiSan.php'; ?>
-
+            <div id="maintable"><div style="margin-top: -19px; margin-bottom: 21px;">                                
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-
-
-
-                        <thead>
+                          <thead>
 
                             <tr>
-
-                                <th> Mã </th>
-
-                                <th> Tên loại tài sản </th>
-                                <th> Tổng số lượng</th>
-                                <th> Chi Tiết</th>
-                                <th> Action</th>
-                                <!-- <th> Số lượng </th>
-
-                                <th> Chi tiết</th> -->
-
-                                <!-- <th> Description </th> -->
-
-                                <!-- <th> Category </th> -->
-
-                                <!-- <th> Cost </th> -->
-
-                                <!-- <th> SRP </th> -->
-
-                                <!-- <th> Supplier </th> -->
-
-                                <!-- <th witdh = "10%"> Thư tồn </th> -->
-
-                                <!-- <th>Số mail thông báo đã gửi trong tháng</th> -->
-
-                                <!-- <th witdh = "10%"> Product Unit </th> -->
-
-                                <!-- <th width="10%"> Action </th> -->
-
+                                <th> Mã phòng </th>
+                                <th> Tên phòng </th>
+                                <th> Số lượng </th>
                             </tr>
 
                         </thead>
@@ -251,12 +233,14 @@ require_once('auth.php');
                                     }
 
                                 }
+
                                 return $number;
+
                             }
 
-                            include('connect.php');
+                           
 
-                            $result = $db->prepare("SELECT * FROM loaitaisan ORDER BY LoaiTaiSan_ID");
+                            $result = $db->prepare("SELECT Distinct Phong_ID FROM dichuyentaisan WHERE TaiSan_ID =".$row0['TaiSan_ID']);
 
                             $result->execute();
 
@@ -265,42 +249,47 @@ require_once('auth.php');
                                 ?>
 
                                 <tr class="record">
-
-                                    <td><?php echo $row['LoaiTaiSan_ID']; ?></td>
-
-                                    <td><?php echo $row['LoaiTaiSan_Ten']; ?></td>
                                     <td>
                                         <?php
-                                            $result1 = $db->prepare("SELECT SUM(soluong) as Tong FROM dichuyentaisan INNER JOIN taisan ON dichuyentaisan.TaiSan_ID = taisan.TaiSan_ID INNER JOIN loaitaisan  ON taisan.LoaiTaiSan_ID = loaitaisan.LoaiTaiSan_ID WHERE loaitaisan.LoaiTaiSan_ID = ".$row['LoaiTaiSan_ID']);
 
-                                            $result1->execute();
+                                        $result1 = $db->prepare("SELECT * FROM phongowv WHERE Phong_ID =".$row['Phong_ID']);
 
-                                            for($j=0; $row1 = $result1->fetch(); $j++){
-                                                echo $row1['Tong'];
-                                            }
+                                        $result1->execute();
+                                        for ($j=0; $row1 = $result1 ->fetch() ; $j++) { 
+                                            echo $row1['Phong_ID'];
                                         ?>
                                     </td>
-                                    <td><a href="DanhSachPhongChuaLoaiTaiSan.php?id=<?php echo $row['LoaiTaiSan_ID']; ?>">Xem Chi Tiết</a></td>                                    
-                                     <td>
-                                        <a rel="facebox" class = "btn btn-primary" href="editLoaiTaiSan.php?id=<?php echo $row['LoaiTaiSan_ID']; ?>&loaitaisan=<?php echo $row['LoaiTaiSan_ID']; ?>">
-                                                <i class="fa fa-pencil"></i>  
+                                    <td>
 
-                                            </a>  
+                                       <?php
 
-                                            <a href="#" id="<?php echo $row['product_id']; ?>" class="btn btn-danger delbutton" title="Click To Delete">
-
-                                                <i class="fa fa-trash"></i>
-
-                                            </a>
-                                    </td>
+                                        
+                                            echo $row1['Phong_Ten'];                                        
+                                        ?>
+                                            
+                                    </td>                                   
+                                    <?php
+                                    
+                                    $result2 = $db->prepare("SELECT SUM(soluong) AS a FROM dichuyentaisan WHERE TaiSan_ID = :taisanid AND Phong_ID = :phongid ");
+                                    $result2->bindParam(':taisanid', $id);
+                                    $result2->bindParam(':phongid', $row1['Phong_ID']);
+                                    $result2->execute();
+                                    for($k = 0; $row2 = $result2->fetch(); $k++)
+                                    {
+                                    ?>
+                                    <td> <?php echo $row2['a']; ?> </td>                                    
+                                    <?php }}} ?>                                    
                                         <?php
                                             }
                                         ?>
                                     </tr>
                                     <?php
-                                
                                 ?>
+
+
+
                             </tbody>
+
                         </table>
 
 

@@ -266,10 +266,9 @@ require_once('auth.php');
                                     ?>
                                     <td> <?php echo $row1['a']; ?> </td>                                    
                                     <?php } ?>
-                                    <td><a href="#">Xem chi tiết</a></td>
+                                    <td><a href="DanhSachPhongChuaTaiSan.php?id=<?php echo $row['TaiSan_ID']; ?>">Xem chi tiết</a></td>
                                      <td>
-                                        <a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
-
+                                        <a rel="facebox" class = "btn btn-primary" href="editTaiSan.php?id=<?php echo $row['TaiSan_ID']; ?>&loaitaisan=<?php echo $row['LoaiTaiSan_ID']; ?>">
                                                 <i class="fa fa-pencil"></i>  
 
                                             </a>  
