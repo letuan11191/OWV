@@ -171,15 +171,14 @@ require_once('auth.php');
             <div class="col-lg-12">
                 <?php
                         include('connect.php'); 
-                        $name = $_GET['id'];
-                        echo $name;
-                        $result = $db->prepare("SELECT * FROM phongOWV WHERE Phong_ID =$name");
+                        $id = $_GET['id'];                        
+                        $result = $db->prepare("SELECT * FROM phongOWV WHERE Phong_ID =$id");
                         $result->execute();
                         for($i=0; $row = $result->fetch(); $i++){
                 ?>
 
                 <h1 class="page-header">Danh Sách Tài Sản Phòng <?php echo $row['Phong_Ten'] ?></h1>
-
+            <? } ?>
             </div>
 
             <div id="maintable"><div style="margin-top: -19px; margin-bottom: 21px;">
@@ -188,7 +187,7 @@ require_once('auth.php');
                     
                 
 
-             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm tài sản</a>             
+             <!-- <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm tài sản</a>      -->        
                     <?php include 'ThemPhong.php'; ?>
 
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -239,30 +238,56 @@ require_once('auth.php');
                                                       
 
                                 ?>
+                                <?php
+
+                                     $result = $db->prepare("SELECT Distinct dichuyentaisan.TaiSan_ID as TaiSan_ID,  TaiSan_Ten,
+                                        loaitaisan.LoaiTaiSan_Ten as LoaiTaiSan_Ten FROM dichuyentaisan Inner Join taisan on taisan.TaiSan_ID = dichuyentaisan.TaiSan_ID Inner Join loaitaisan On taisan.LoaiTaiSan_ID = loaitaisan.LoaiTaiSan_ID WHERE Phong_ID =".$id);
+
+                                    $result->execute();
+
+                                    for($i=0; $row = $result->fetch(); $i++){
+                                ?>
 
                                 <tr class="record">
                                 	<td>
-                                		<?php echo $row['LoaiPhong_Ten']; ?>
+                                        
+                                		  <?php echo $row['LoaiTaiSan_Ten'] ?>
+                                        
                                 	</td>                                    
-                                    <td><?php echo $row['Phong_Ten']; ?></td>
-                                    <td> <a href="#">Xem chi tiết tài sản trong phòng</a></td>
                                     <td>
-                                    	<a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=<?php echo $row['product_id']; ?>">
+                                        <a href="DanhSachPhongChuaTaiSan.php?id=<?php echo $row['TaiSan_ID']; ?>">
+                                        <?php echo $row['TaiSan_Ten']; ?>
+                                        </a>
+                                    </td>
+                                    <?php
+                                    $result1 = $db->prepare("SELECT SUM(soluong) as soluong From dichuyentaisan Where Phong_ID = :phongid AND TaiSan_ID = :taisanid ");
+                                    $result1->bindParam(':taisanid', $row['TaiSan_ID']);  
+                                    $result1->bindParam(':phongid', $id); 
+                                    $result1->execute();
 
-                                                <i class="fa fa-pencil"></i>  
+                                    for($j=0; $row1 = $result1->fetch(); $j++){
+                                        ?>
+                                    <td> 
+                                        <?php
+                                        echo $row1['soluong'];
+                                        ?>                                    
+                                    </td>
+                                    <?php
+                                    };
+                                        ?>
+                                    <td>
+                                    	<a class = "btn btn-primary" href="DiChuyenTaiSan.php?id=<?php echo $row['TaiSan_ID']; ?>&phongid=<?php echo $id?>">
+
+                                                <i class="glyphicon glyphicon-share-alt"></i>  
 
                                             </a>  
 
-                                            <a href="#" id="<?php echo $row['product_id']; ?>" class="btn btn-danger delbutton" title="Click To Delete">
-
-                                                <i class="fa fa-trash"></i>
-
-                                            </a>
+                                            
                                     </td>
 
                                         <?php
 
-                                            }
+                                            }}
 
                                         ?>
 

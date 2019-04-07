@@ -162,79 +162,56 @@ require_once('auth.php');
                     <div class="col-lg-12">
                         <?php                        
                           include('connect.php');
-                                 if(isset($_GET['id']) && isset($_GET['phongid']))
-                                 {
-                                  $result = $db->prepare("SELECT * FROM taisan WHERE TaiSan_ID = ".$_GET['id']);
-                                  $result->execute();
-                                  $result1 = $db->prepare("SELECT * FROM phongowv WHERE Phong_ID = ".$_GET['phongid']);                                 
-                                  $result1->execute();
-                                  $ghichu = "Bổ sung";
+                                 // if(isset($_GET['id']) && isset($_GET['phongid']))
+                                 // {
+                                 //  $result = $db->prepare("SELECT * FROM taisan WHERE TaiSan_ID = ".$_GET['id']);
+                                 //  $result->execute();
+                                 $result = $db->prepare("SELECT * FROM phongowv");                                 
+                                 $result->execute();
+                                 
+                                 //  $ghichu = "Bổ sung";
                                   
-                                 }
-                                 else{
-                                  $result = $db->prepare("SELECT * FROM taisan ");
-                                  $result->execute();
-                                  $result1 = $db->prepare("SELECT * FROM phongowv ");
-                                  $result1->execute();
-                                  $ghichu = "Mua Mới";
-                                  ?>
-                                    <h1>Bổ sung tài sản</h1>
-                                  <?php
-                                 }  
+                                 // }
+                                 // else{
+                                 $result1 = $db->prepare("SELECT * FROM phongowv ");
+                                 $result1->execute();
+                                 //  $result1 = $db->prepare("SELECT * FROM phongowv ");
+                                 //  $result1->execute();
+                                 //  $ghichu = "Mua Mới";
+                                 
+                                 // }  
                         ?>
-                        
+                        <h1>Nhập phòng</h1>
                     </div>
                  <div class="modal-body">
 
-                    <form action="SaveAddBoSungTaiSan.php" method="post" class = "form-group" >
+                    <form action="SaveAddNhapPhong.php" method="post" class = "form-group" >
 
                         <div id="ac1">
-                            <span>Tên Tài Sản : </span>
-                             <select name="taisanid" style="width: 550px;" class="chzn-select">
+                            <span>Phòng giữ : </span>
+                             <select name="phonggiu" style="width: 550px;" class="chzn-select">
                              <?php
                                  
-                                 for($i=0; $row = $result->fetch(); $i++){
+                                  for($i=0; $row = $result->fetch(); $i++){
                                   ?>
 
-                                  <option value="<?php echo $row['TaiSan_ID']; ?>"><?php echo $row['TaiSan_Ten']; ?></option>
-
-                                  <?php
-                                }
-                                
-                                ?>
+                                  <option value="<?php echo $row['Phong_ID']; ?>"><?php echo $row['Phong_Ten']; ?></option>
+                                  <?php } ?>
+                                 
                                   </select><br />
-                                  <span>Thêm vào phòng: </span>
-                                  <select name="phong" style="width: 550px;" class="chzn-select">
-
-                                 <?php
-
-                                 
-
-                                 //$id =$_GET['name'];
-
-                                 
-                                 
-                                 for($j=0; $row1 = $result1->fetch(); $j++){
-                                 
-
+                                  <span>Phòng nhập : </span>
+                                  <select name="phongnhap" style="width: 550px;" class="chzn-select">
+                                    <?php
+                                  for($j=0; $row1 = $result1->fetch(); $j++){
                                   ?>
 
                                   <option value="<?php echo $row1['Phong_ID']; ?>"><?php echo $row1['Phong_Ten']; ?></option>
-
-                                  <?php
-
-                                }
-
-                                
-
-                                ?>
+                                  <?php } ?>
 
                               </select><br />
 
-                            <span>Số lượng : </span><input type="text" name="soluong" class = "form-control" />
-
-                            <span>Ghi Chú : </span><input type="text" name="ghichu" class = "form-control" value="<?php echo $ghichu?>" />
-                            <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Save" />
+                            
+                            <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Nhập" />
 
                         </div>
 

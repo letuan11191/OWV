@@ -20,7 +20,6 @@ $sql = "INSERT INTO taisan (TaiSan_Ten, loaitaisan_ID) VALUES (?,?)";
 
 				$q->execute(array($a, $b));
 
-
 				header('location: SaveAddChiTietTaiSan.php?tentaisan='.$a.'&sl='.$c.'&ghichu='.$d.'&phong='.$e);
 
 

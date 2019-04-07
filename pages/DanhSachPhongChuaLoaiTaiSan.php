@@ -174,20 +174,17 @@ require_once('auth.php');
 
             <div class="col-lg-12">
 
-                <h1 class="page-header">Chi tiết phòng chứa loại tài sản: <?php 
-                $result = $db->prepare("SELECT * FROM loaitaisan WHERE LoaiTaiSan_ID =".$id);
-
-                            $result->execute();
-
-                            for($i1=0; $rowi1 = $result->fetch(); $i1++){
+                <h1 class="page-header">Chi tiết phòng chứa loại tài sản: 
+                    <?php 
+                            $result01 = $db->prepare("SELECT * FROM loaitaisan WHERE LoaiTaiSan_ID =".$id);
+                            $result01->execute();
+                            for($i1=0; $rowi1 = $result01->fetch(); $i1++)
+                            {
                                     echo $rowi1['LoaiTaiSan_Ten'];
                             }
-                            $result0 = $db->prepare("SELECT Distinct TaiSan_ID FROM taisan WHERE LoaiTaiSan_ID =".$id);
 
-                            $result0->execute();
-
-                            for($l=0; $row0 = $result0->fetch(); $l++){
-                                ?>
+                            
+                    ?>
 
 
             </div>
@@ -199,6 +196,7 @@ require_once('auth.php');
                             <tr>
                                 <th> Mã phòng </th>
                                 <th> Tên phòng </th>
+                                <th> Tên tài sản </th>
                                 <th> Số lượng </th>
                             </tr>
 
@@ -236,10 +234,12 @@ require_once('auth.php');
 
                                 return $number;
 
-                            }
+                            }        
+                            $result0 = $db->prepare("SELECT Distinct dichuyentaisan.TaiSan_ID as TaiSan_ID,  TaiSan_Ten FROM taisan Inner Join dichuyentaisan on taisan.TaiSan_ID = dichuyentaisan.TaiSan_ID WHERE LoaiTaiSan_ID =".$id);
 
-                           
+                            $result0->execute();
 
+                            for($l=0; $row0 = $result0->fetch(); $l++){                                                                         
                             $result = $db->prepare("SELECT Distinct Phong_ID FROM dichuyentaisan WHERE TaiSan_ID =".$row0['TaiSan_ID']);
 
                             $result->execute();
@@ -249,16 +249,19 @@ require_once('auth.php');
                                 ?>
 
                                 <tr class="record">
-                                    <td>
-                                        <?php
+                                    <?php
 
-                                        $result1 = $db->prepare("SELECT * FROM phongowv WHERE Phong_ID =".$row['Phong_ID']);
+                                        $result1 = $db->prepare("SELECT Distinct Phong_Ten FROM phongowv WHERE Phong_ID =".$row['Phong_ID']);
 
                                         $result1->execute();
                                         for ($j=0; $row1 = $result1 ->fetch() ; $j++) { 
-                                            echo $row1['Phong_ID'];
+                                    ?>
+                                    <td>
+                                        <?php
+                                            echo $row['Phong_ID'];
                                         ?>
                                     </td>
+                                   
                                     <td>
 
                                        <?php
@@ -267,21 +270,27 @@ require_once('auth.php');
                                             echo $row1['Phong_Ten'];                                        
                                         ?>
                                             
-                                    </td>                                   
+                                    </td>   
+
+                                     <td>
+                                        <?php
+                                            echo $row0['TaiSan_Ten'];
+                                        ?>
+                                    </td>                                
                                     <?php
                                     
-                                    $result2 = $db->prepare("SELECT SUM(soluong) AS a FROM dichuyentaisan WHERE TaiSan_ID = :taisanid AND Phong_ID = :phongid ");
-                                    $result2->bindParam(':taisanid', $id);
-                                    $result2->bindParam(':phongid', $row1['Phong_ID']);
-                                    $result2->execute();
-                                    for($k = 0; $row2 = $result2->fetch(); $k++)
-                                    {
+                                   
                                     ?>
-                                    <td> <?php echo $row2['a']; ?> </td>                                    
-                                    <?php }}} ?>                                    
-                                        <?php
-                                            }
-                                        ?>
+                                        <td> <?php 
+                                         $result2 = $db->prepare("SELECT SUM(soluong) AS a FROM dichuyentaisan WHERE TaiSan_ID = :taisanid AND Phong_ID = :phongid ");
+                                        $result2->bindParam(':taisanid', $row0['TaiSan_ID']);  
+                                        $result2->bindParam(':phongid', $row['Phong_ID']);                                    
+                                        $result2->execute();
+                                        for($k = 0; $row2 = $result2->fetch(); $k++)
+                                        {
+                                        echo $row2['a'];
+                                        } ?> </td>                                    
+                                    <?php }}} ?>                                                                            
                                     </tr>
                                     <?php
                                 ?>

@@ -179,8 +179,8 @@ require_once('auth.php');
 
 
              <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm phòng</a>
-             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Nhập phòng</a>
-             <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Tách phòng</a>
+             <a  href = "nhapphong.php" class="btn btn-primary">Nhập phòng</a>
+             
 
                     <?php include 'ThemPhong.php'; ?>
 

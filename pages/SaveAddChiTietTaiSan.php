@@ -22,7 +22,7 @@ $g = $_GET['phong'];
                     echo $row["TaiSan_ID"];
                     header("location: taisan.php");
                }
-              
+             
 
 
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2019 at 08:31 PM
+-- Generation Time: Apr 07, 2019 at 07:41 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -328,7 +328,7 @@ INSERT INTO `dichuyentaisan` (`DiChuyeTaiSan_ID`, `Ngay`, `TaiSan_ID`, `SoLuong`
 (138, '0000-00-00', '20', 1000, 'Bá»• sung', 'Mua Má»›i', 1),
 (139, '0000-00-00', '20', 1000, 'Bá»• sung', 'Mua Má»›i', 1),
 (140, '0000-00-00', '20', 1000, 'Bá»• sung', 'Mua Má»›i', 1),
-(141, '0000-00-00', '20', 100000, 'Bá»• sung', 'Mua Má»›i', 3),
+(141, '0000-00-00', '20', 100000, 'Bá»• sung', 'Mua Má»›i', 2),
 (142, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 1),
 (143, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 1),
 (144, '0000-00-00', '15', 0, 'Bá»• sung', 'Mua Má»›i', 1),
@@ -340,7 +340,36 @@ INSERT INTO `dichuyentaisan` (`DiChuyeTaiSan_ID`, `Ngay`, `TaiSan_ID`, `SoLuong`
 (150, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 1),
 (151, '0000-00-00', '1', 1, 'Bá»• sung', 'Mua Má»›i', 1),
 (152, '0000-00-00', '15', 70, 'Bá»• sung', 'Mua Má»›i', 1),
-(153, '0000-00-00', '21', 70, 'Bá»• sung', 'Mua Má»›i', 1);
+(153, '0000-00-00', '21', 70, 'Bá»• sung', 'Mua Má»›i', 1),
+(154, '0000-00-00', '20', 30000, 'Bá»• sung', 'Mua Má»›i', 1),
+(155, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 2),
+(156, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 2),
+(157, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 2),
+(158, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 2),
+(159, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 1),
+(160, '0000-00-00', '1', 0, 'Bá»• sung', 'Mua Má»›i', 2),
+(161, '0000-00-00', '44', 2, 'Bá»• sung', 'Mua Má»›i', 1),
+(162, '0000-00-00', '23', 30, 'Bá»• sung', 'Mua Má»›i', 1),
+(163, '0000-00-00', '48', 2, 'Nháº­p má»›i', 'Mua Má»›i', 1),
+(164, '0000-00-00', '48', 2, 'Nháº­p má»›i', 'Mua Má»›i', 1),
+(165, '0000-00-00', '21', 100, 'Bá»• sung', 'Mua Má»›i', 1),
+(166, '0000-00-00', '15', 300, 'Bá»• sung', 'Mua Má»›i', 9),
+(167, '0000-00-00', '49', 1, 'Nháº­p má»›i', 'Mua Má»›i', 2),
+(168, '0000-00-00', '49', 2, 'Bá»• sung', 'Mua Má»›i', 4),
+(169, '0000-00-00', '20', -1, '', NULL, 2),
+(170, '0000-00-00', '20', 1, '', NULL, 2),
+(171, '0000-00-00', '20', -1, '', NULL, 2),
+(172, '0000-00-00', '20', 1, '', NULL, 9),
+(173, '0000-00-00', '15', -1, 'Chuyen tu 9 sang 5', NULL, 9),
+(174, '0000-00-00', '15', 1, 'Chuyen tu 9 sang 5', NULL, 5),
+(175, '0000-00-00', '15', -1, 'Chuyen tu 9 sang 5', NULL, 9),
+(176, '0000-00-00', '15', 1, 'Chuyen tu 9 sang 5', NULL, 5),
+(177, '0000-00-00', '15', -1, 'Chuyen tu 9 sang 4', NULL, 9),
+(178, '0000-00-00', '15', 1, 'Chuyen tu 9 sang 4', NULL, 4),
+(179, '0000-00-00', '15', -1, 'Chuyen tu 9 sang 5', NULL, 9),
+(180, '0000-00-00', '15', 1, 'Chuyen tu 9 sang 5', NULL, 5),
+(181, '0000-00-00', '15', -1, 'Chuyen tu 9 sang 6', NULL, 9),
+(182, '0000-00-00', '15', 1, 'Chuyen tu 9 sang 6', NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -380,7 +409,8 @@ CREATE TABLE `loaitaisan` (
 INSERT INTO `loaitaisan` (`LoaiTaiSan_ID`, `LoaiTaiSan_Ten`) VALUES
 (2, 'Tá»§'),
 (3, 'BÃ n'),
-(4, 'Gháº¿');
+(4, 'Gháº¿'),
+(5, 'Há»™c Má»›i');
 
 -- --------------------------------------------------------
 
@@ -437,19 +467,23 @@ INSERT INTO `ngayle` (`id`, `tenngayle`, `template`) VALUES
 CREATE TABLE `phongowv` (
   `Phong_ID` int(11) NOT NULL,
   `Phong_Ten` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
-  `LoaiPhong_ID` int(11) NOT NULL
+  `LoaiPhong_ID` int(11) NOT NULL,
+  `Enable` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `phongowv`
 --
 
-INSERT INTO `phongowv` (`Phong_ID`, `Phong_Ten`, `LoaiPhong_ID`) VALUES
-(1, '2101', 1),
-(2, '2102', 3),
-(3, '2103', 2),
-(4, '2104', 2),
-(5, '2105', 2);
+INSERT INTO `phongowv` (`Phong_ID`, `Phong_Ten`, `LoaiPhong_ID`, `Enable`) VALUES
+(1, '2101', 1, 1),
+(2, '2102', 3, 0),
+(4, '2104', 2, 0),
+(5, '2105', 2, 0),
+(6, 'Mua Má»›i', 3, 0),
+(7, 'Thanh LÃ½', 1, 0),
+(8, 'Há»ng', 3, 1),
+(9, '2133', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -4416,43 +4450,46 @@ INSERT INTO `supliers_old` (`suplier_id`, `suplier_name`, `suplier_address`, `su
 CREATE TABLE `taisan` (
   `TaiSan_ID` int(11) NOT NULL,
   `TaiSan_Ten` varchar(100) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
-  `LoaiTaiSan_ID` int(11) NOT NULL
+  `LoaiTaiSan_ID` int(11) NOT NULL,
+  `Xoa` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `taisan`
 --
 
-INSERT INTO `taisan` (`TaiSan_ID`, `TaiSan_Ten`, `LoaiTaiSan_ID`) VALUES
-(1, 'Test1', 2),
-(14, 'q', 2),
-(15, '1', 2),
-(20, 'aaa', 1),
-(21, 'Tu test 01', 2),
-(22, 'Tu test 02', 2),
-(23, 'Tu Test 03', 2),
-(24, 'Tu Test 04', 2),
-(25, 'Ghe Test 01', 2),
-(26, 'Ghe Test 02', 2),
-(27, 'Ghe Test 03', 2),
-(29, 'Ghe Test 04', 2),
-(30, 'Hoc 01', 2),
-(31, 'tt', 2),
-(32, 'ttt', 2),
-(33, 'May tinh', 2),
-(35, 'May tinh 1', 2),
-(36, 'bbbbb', 2),
-(37, 'ccccccccc', 2),
-(38, 'vvvvvvvv', 2),
-(39, 'xcxcxc', 2),
-(40, 'bvbv', 2),
-(41, 'jjjj', 2),
-(42, 'bnbn', 2),
-(43, 'bnbn1', 2),
-(44, 'Cua kinh', 2),
-(45, 'Cua gho', 2),
-(46, 'Met VL', 2),
-(47, '', 2);
+INSERT INTO `taisan` (`TaiSan_ID`, `TaiSan_Ten`, `LoaiTaiSan_ID`, `Xoa`) VALUES
+(1, 'Test1', 2, 0),
+(14, 'q', 2, 0),
+(15, '1', 2, 0),
+(20, 'aaa', 3, 0),
+(21, 'Tu test 01', 2, 0),
+(22, 'Tu test 02', 2, 0),
+(23, 'Tu Test 03', 2, 0),
+(24, 'Tu Test 04', 2, 0),
+(25, 'Ghe Test 01', 2, 0),
+(26, 'Ghe Test 02', 2, 0),
+(27, 'Ghe Test 03', 2, 0),
+(29, 'Ghe Test 04', 2, 0),
+(30, 'Hoc 01', 2, 0),
+(31, 'tt', 2, 0),
+(32, 'ttt', 2, 0),
+(33, 'May tinh', 2, 0),
+(35, 'May tinh 1', 2, 0),
+(36, 'bbbbb', 2, 0),
+(37, 'ccccccccc', 2, 0),
+(38, 'vvvvvvvv', 2, 0),
+(39, 'xcxcxc', 2, 0),
+(40, 'bvbv', 2, 0),
+(41, 'jjjj', 2, 0),
+(42, 'bnbn', 2, 0),
+(43, 'bnbn1', 2, 0),
+(44, 'Cua kinh', 2, 0),
+(45, 'Cua gho', 2, 0),
+(46, 'Met VL', 2, 0),
+(47, '', 2, 0),
+(48, 'Tá»§ Má»›i', 2, 0),
+(49, 'Gháº¿ Da', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -4610,7 +4647,7 @@ ALTER TABLE `datphong`
 -- AUTO_INCREMENT for table `dichuyentaisan`
 --
 ALTER TABLE `dichuyentaisan`
-  MODIFY `DiChuyeTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `DiChuyeTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT for table `loaiphong`
@@ -4622,7 +4659,7 @@ ALTER TABLE `loaiphong`
 -- AUTO_INCREMENT for table `loaitaisan`
 --
 ALTER TABLE `loaitaisan`
-  MODIFY `LoaiTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `LoaiTaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ngayle`
@@ -4634,7 +4671,7 @@ ALTER TABLE `ngayle`
 -- AUTO_INCREMENT for table `phongowv`
 --
 ALTER TABLE `phongowv`
-  MODIFY `Phong_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Phong_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -4664,7 +4701,7 @@ ALTER TABLE `supliers`
 -- AUTO_INCREMENT for table `taisan`
 --
 ALTER TABLE `taisan`
-  MODIFY `TaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `TaiSan_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

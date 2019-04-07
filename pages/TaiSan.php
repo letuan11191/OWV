@@ -159,8 +159,9 @@ require_once('auth.php');
 <body>
 
     <?php include('navfixed.php');?>
-    <?php include 'BoSungTaiSan.php'; ?>
-    <?php include 'ThemTaiSan.php'; ?> 
+    
+    <?php include ('ThemTaiSan.php'); ?> 
+   
 
 
 
@@ -178,7 +179,7 @@ require_once('auth.php');
 
             <div id="maintable"><div style="margin-top: -19px; margin-bottom: 21px;">
              <a  href = "#add" data-toggle = "modal" class="btn btn-primary">Thêm tài sản</a>
-             <a  href = "#bosung" data-toggle = "modal" class="btn btn-primary">Bổ sung tài sản</a>
+             <a  href = "BoSungTaiSan.php"  class="btn btn-primary">Bổ sung tài sản</a>
                        
             
                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">

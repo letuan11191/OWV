@@ -255,13 +255,13 @@ require_once('auth.php');
                                         ?>
                                     </td>
                                     <td>
-
+                                        <a href="chitiettaisantheophong.php?id=<?php echo $row['Phong_ID']?>">
                                        <?php
 
                                         
                                             echo $row1['Phong_Ten'];                                        
                                         ?>
-                                            
+                                        </a>
                                     </td>                                   
                                     <?php
                                     

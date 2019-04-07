@@ -10,7 +10,8 @@ $db_pass		= '';
 
 $db_database	= 'openworl_qlt'; 
 
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$timenow = date('d-m-Y H:i:s');
 
 /* End config */
 
